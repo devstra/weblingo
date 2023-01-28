@@ -1,9 +1,8 @@
-import duolingo
-import getpass
+# pip install googletrans==3.1.0a0
+import googletrans
+from googletrans import *
 
-user = input("Username: ") 
-pwd = getpass.getpass()
-lingo  = duolingo.Duolingo(user, pwd)
+translator = googletrans.Translator()
+t = translator.translate("Hello sir", dest="french")
 
-print(lingo.get_user_info())    # Test, don't print this plz
-
+print(t.text)
