@@ -1,8 +1,15 @@
 <html>
+    <script>
+        let hiddenInput = document.getElementsById('hiddenButton');
+        function alertFunction() {
+            hiddenInput.removeAttribute('hidden');
+       } 
+    </script>
     <body>
-        <div class="block1">
+        <div>
             <h1>Weblingo</h1>
-            
         </div>
+        <input type="button" id="testButton" value="Click Me!" onclick="alertFunction()"/>
+        <input type="button" id="hiddenButton" value="Now, click me!" onclick="" hidden />
     </body>
 </html>
