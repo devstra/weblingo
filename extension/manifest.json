@@ -3,7 +3,10 @@
     "name": "Duolingo Extension",
     "description": "Base Level Extension",
     "version": "1.0",
-    "action": {
-      "default_popup": "basic.html"
-    }
+    "content_scripts": [
+      {
+        "js": ["scripts/content.js"],
+        "matches": ["https://developer.chrome.com/docs/extensions/*", "https://developer.chrome.com/docs/webstore/*"]
+      }
+    ]
   }
