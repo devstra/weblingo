@@ -19,9 +19,9 @@ if (article) {
 }*/
 
 // create possible variable options
-let option1 = "Bonjour";
-let option2 = "Au revoir";
-let option3 = "Merci";
+let option1 = "Hello";
+let option2 = "Welcome";
+let option3 = "Goodbye";
 
 // Create an overlay element
 let overlay = document.createElement("div");
@@ -62,8 +62,8 @@ modal.style.transform = "translate(-50%, -50%)";
 modal.style.backgroundColor = "white";
 modal.style.padding = "20px";
 modal.style.zIndex = "10000";
-modal.style.width = "18%";
-modal.style.height = "40%";
+modal.style.width = "22%";
+modal.style.height = "43%";
 modal.style.fontSize = "100px !important";
 //modal.innerHTML = `<h3>${translateWord} means...<h3/>`;
 
@@ -73,6 +73,7 @@ element.id = "element";
 element.className = '';
 element.style.paddingBottom = "10px";
 element.innerHTML = `<h3><br>${translateWord} means...<h3/>`;
+
 
 let button1 = document.createElement("button");
 button1.className = 'btn';
@@ -87,6 +88,7 @@ button1.style.marginLeft = "auto";
 button1.style.marginRight = "auto";
 button1.style.display = "block";
 button1.innerHTML = option1;
+
 
 let button2 = document.createElement("button");
 button2.className = 'btn';
@@ -117,7 +119,7 @@ button3.style.display = "block";
 button3.innerHTML = option3;
 
 // Add event listener to the button
-button1.addEventListener('click', () => {
+button1.addEventListener('click', () => {    
     console.log("button1 clicked");
 });
 
@@ -130,7 +132,39 @@ button3.addEventListener('click', () => {
 });
 
 button1.onmouseover = function() {
-    button1.style.backgroundColor = "green";
+    button1.style.backgroundColor = "#ddf4ff";
+    button1.style.border = "2px solid #1cb0f6";
+    button1.style.borderBottom = "6px solid #1cb0f6";
+}
+
+button1.onmouseout = function() {
+    button1.style.backgroundColor = "white";
+    button1.style.border = "2px solid #e5e5e5";
+    button1.style.borderBottom = "6px solid #e5e5e5";
+}
+
+button2.onmouseover = function() {
+    button2.style.backgroundColor = "#ddf4ff";
+    button2.style.border = "2px solid #1cb0f6";
+    button2.style.borderBottom = "6px solid #1cb0f6";
+}
+
+button2.onmouseout = function() {
+    button2.style.backgroundColor = "white";
+    button2.style.border = "2px solid #e5e5e5";
+    button2.style.borderBottom = "6px solid #e5e5e5";
+}
+
+button3.onmouseover = function() {
+    button3.style.backgroundColor = "#ddf4ff";
+    button3.style.border = "2px solid #1cb0f6";
+    button3.style.borderBottom = "6px solid #1cb0f6";
+}
+
+button3.onmouseout = function() {
+    button3.style.backgroundColor = "white";
+    button3.style.border = "2px solid #e5e5e5";
+    button3.style.borderBottom = "6px solid #e5e5e5";
 }
 
 
