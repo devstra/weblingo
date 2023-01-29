@@ -524,17 +524,17 @@ checkButton.style.float = "right";
     }
 });
 
-// Append the modal to the overlay
-overlay.appendChild(modal);
-modal.appendChild(img);
-modal.appendChild(element);
-modal.appendChild(button1);
-modal.appendChild(button2);
-modal.appendChild(button3);
-modal.appendChild(checkButton);
+// // Append the modal to the overlay
+// overlay.appendChild(modal);
+// modal.appendChild(img);
+// modal.appendChild(element);
+// modal.appendChild(button1);
+// modal.appendChild(button2);
+// modal.appendChild(button3);
+// modal.appendChild(checkButton);
 
-// Append the overlay to the body
-document.body.appendChild(overlay);
+// // Append the overlay to the body
+// document.body.appendChild(overlay);
 // close modal when exiticon is clicked
  img.addEventListener('click', () => {
     console.log("exiticon clicked");
