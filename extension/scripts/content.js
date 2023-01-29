@@ -22,6 +22,7 @@ if (article) {
 let option1 = "Hello";
 let option2 = "Welcome";
 let option3 = "Goodbye";
+let buttonSelected = 0;
 
 // Create an overlay element
 let overlay = document.createElement("div");
@@ -70,7 +71,6 @@ modal.style.zIndex = "10000";
 modal.style.width = "22%";
 modal.style.height = "43%";
 modal.style.fontSize = "100px !important";
-//modal.innerHTML = `<h3>${translateWord} means...<h3/>`;
 
 let translateWord = "Bonjour"
 let element = document.createElement("div");
@@ -123,57 +123,63 @@ button3.style.marginRight = "auto";
 button3.style.display = "block";
 button3.innerHTML = option3;
 
-// Add event listener to the button
-button1.addEventListener('click', () => {    
-    console.log("button1 clicked");
+button1.addEventListener('click', () => {
+    buttonSelected = 1;
+    button1.style.borderBottom = "2px solid #1cb0f6";
+    button1.style.backgroundColor = "";
+    setTimeout(() => {
+        button1.style.borderBottom = "6px solid #1cb0f6";
+    }, 300);
+    // set button to blue
+    button1.style.backgroundColor = "#ddf4ff";
+    button1.style.border = "2px solid #1cb0f6";
 });
 
 button2.addEventListener('click', () => {
-    console.log("button2 clicked");
+    buttonSelected = 2;
+    button2.style.borderBottom = "2px solid #1cb0f6";
+    setTimeout(() => {
+        button2.style.borderBottom = "6px solid #1cb0f6";
+    }, 300);
+    // set button to blue
+    button2.style.backgroundColor = "#ddf4ff";
+    button2.style.border = "2px solid #1cb0f6";
 });
 
 button3.addEventListener('click', () => {
-    console.log("button3 clicked");
+    buttonSelected = 3;
+    button3.style.borderBottom = "2px solid #1cb0f6";
+    setTimeout(() => {
+        button3.style.borderBottom = "6px solid #1cb0f6";
+    }, 300);
+    // set button to blue
+    button3.style.backgroundColor = "#ddf4ff";
+    button3.style.border = "2px solid #1cb0f6";
 });
 
 button1.onmouseover = function() {
-    button1.style.backgroundColor = "#ddf4ff";
-    button1.style.border = "2px solid #1cb0f6";
-    button1.style.borderBottom = "6px solid #1cb0f6";
+    button1.style.backgroundColor = "#f8f4f4";
 }
 
 button1.onmouseout = function() {
     button1.style.backgroundColor = "white";
-    button1.style.border = "2px solid #e5e5e5";
-    button1.style.borderBottom = "6px solid #e5e5e5";
 }
 
 button2.onmouseover = function() {
-    button2.style.backgroundColor = "#ddf4ff";
-    button2.style.border = "2px solid #1cb0f6";
-    button2.style.borderBottom = "6px solid #1cb0f6";
+    button2.style.backgroundColor = "#f8f4f4";
 }
 
 button2.onmouseout = function() {
     button2.style.backgroundColor = "white";
-    button2.style.border = "2px solid #e5e5e5";
-    button2.style.borderBottom = "6px solid #e5e5e5";
 }
 
 button3.onmouseover = function() {
-    button3.style.backgroundColor = "#ddf4ff";
-    button3.style.border = "2px solid #1cb0f6";
-    button3.style.borderBottom = "6px solid #1cb0f6";
+    button3.style.backgroundColor = "#f8f4f4";
 }
 
 button3.onmouseout = function() {
     button3.style.backgroundColor = "white";
-    button3.style.border = "2px solid #e5e5e5";
-    button3.style.borderBottom = "6px solid #e5e5e5";
 }
-
-
-
 
 // Append the modal to the overlay
 overlay.appendChild(modal);
