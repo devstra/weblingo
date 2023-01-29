@@ -1,3 +1,9 @@
+chrome.browserAction.onClicked.addListener(function(tab) {
+    chrome.tabs.executeScript(null, { file: "jquery-3.6.3.min.js" }, function() {
+      chrome.tabs.executeScript(null, { file: "popup.js" });
+    });
+  });
+
 function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
 }

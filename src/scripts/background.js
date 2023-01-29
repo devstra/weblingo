@@ -1,18 +1,14 @@
-// Extension state control flow
-const extensions = "https://developer.chrome.com/docs/extensions"
 
-chrome.runtime.onInstalled.addListener(() => {
-    chrome.action.setBadgeText({
-        text: "OFF",
-    });
-});
-var currentState;
-chrome.action.onClicked.addListener(async () => {
-    const prevState = await chrome.action.getBadgeText({});
-    const nextState = prevState === "ON" ? "OFF" : "ON";
-    currentState = prevState;
-    
-    await chrome.action.setBadgeText({
-        text : nextState,
-    })
-});
+var serverhost = 'http://127.0.0.1:8000';
+    chrome.runtime.onMessage.addListener(
+        function(request, sender, sendResponse) {
+            var url = serverhost + '/weblingo/learn_to_en/?text="bon"&lang="french"' + encodeURIComponent(request.text, request.lang);
+            console.log(url);
+            fetch(url)
+            .then(response => response.json())
+            .then(response => sendResponse({farewell: response}))
+            .catch(error => console.log(error))
+
+            return true;
+
+        });
