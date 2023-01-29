@@ -15,6 +15,8 @@ function randomWordArray(text, numWords) {
     return array;
 }
 
+
+
 var serverhost = 'http://127.0.0.1:8000';
 function translateApiRequest(request) {
     var url = serverhost + '/weblingo/en_to_learn/?text=' + encodeURIComponent(request.text) + '&lang=' + encodeURIComponent(request.lang);
