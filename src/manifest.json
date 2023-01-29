@@ -16,7 +16,7 @@
     
     "web_accessible_resources": [
       {
-        "resources": ["scripts/jquery-3.6.3.min.js"],
+        "resources": ["scripts/jquery-3.6.3.min.js", "scripts/exiticon.png"],
         "matches": ["<all_urls>"]
       }
     ],
