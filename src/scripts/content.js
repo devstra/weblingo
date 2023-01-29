@@ -15,8 +15,6 @@ function randomWordArray(text, numWords) {
     return array;
 }
 
-
-
 var serverhost = 'http://127.0.0.1:8000';
 function translateApiRequest(request) {
     var url = serverhost + '/weblingo/en_to_learn/?text=' + encodeURIComponent(request.text) + '&lang=' + encodeURIComponent(request.lang);
@@ -114,7 +112,6 @@ element.id = "element";
 element.className = '';
 element.style.paddingBottom = "10px";
 element.innerHTML = `<h3><br>${translateWord} means...<h3/>`;
-
 
 let button1 = document.createElement("button");
 button1.className = 'btn';
@@ -298,7 +295,6 @@ checkButton.style.transition = "0.1s";
 checkButton.innerHTML = "Check";
 checkButton.style.float = "right";
 
-
 checkButton.addEventListener('click', () => {
     checkButton.style.borderBottomWidth = "2px";
     checkButton.style.marginTop = "4px";
@@ -351,6 +347,3 @@ modal.appendChild(checkButton);
 
 // Append the overlay to the body
 document.body.appendChild(overlay);
-
-
-    
