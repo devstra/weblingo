@@ -40,14 +40,22 @@ function translateArray(array) {
     }
 }
 
-const article = document.querySelector("article");
+const article = document.querySelector(".c-article-body__content");
 if (article) {
+    var instance = new Mark(article);
     let randWordArray = randomWordArray(article.textContent, 3);
-    console.log(randWordArray);
-    // let tArray = translateArray(randWordArray);
-    // console.log(tArray);
-    translateApiRequest({text: randWordArray[0], lang: "latin"});
+    console.log("HERE 123");
+    console.log(article.innerHTML);
+    for(let i = 0; i < randWordArray.length; i++) {
+        instance.mark(randWordArray[i], {"accuracy": "exactly"});
+        //article.innerHTML = article.innerHTML.replace(randWordArray[i], "CHANGING");
     }
+    console.log(randWordArray);
+
+
+    translateApiRequest({text: randWordArray[0], lang: "latin"});
+}
+    
 
     // create possible variable options
 let option1 = "Hello";
