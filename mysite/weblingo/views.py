@@ -47,11 +47,13 @@ def verify_ans_from_learn(request):
     lang = request.GET.get('lang', None)
 
     transl_att = translator.translate(attempt, src=lang, dest="english")
-    result = "Failed"
-    if question == transl_att:
-        result = "Success!"
-    
     correct_ans = translator.translate(question, src="english", dest=lang)
+
+    result = "Failed"
+    if attempt == correct_ans.text:
+        result = "Success!"
+
+    print(transl_att.text)
 
     data = {
         'result' : result,
@@ -66,12 +68,14 @@ def verify_ans_from_en(request):
     question = request.GET.get('question', None)
     lang = request.GET.get('lang', None)
 
-    transl_att = translator.translate(question, src="english", dest=lang)
-    result = "Failed"
-    if question == transl_att:
-        result = "Success!"
+    transl_att = translator.translate(attempt, src="english", dest=lang)
+    correct_ans = translator.translate(question, src=lang, dest="english")
     
-    correct_ans = translator.translate(attempt, src=lang, dest="english")
+    print(transl_att.text)
+
+    result = "Failed"
+    if attempt == correct_ans.text:
+        result = "Success!"
 
     data = {
         'result' : result,
