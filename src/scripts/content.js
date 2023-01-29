@@ -56,6 +56,9 @@ let correctAnswer = 1;
 let button1Checked = false;
 let button2Checked = false;
 let button3Checked = false;
+let word1Completed = false;
+let word2Completed = false;
+let word3Completed = false;
 
 // Create an overlay element
 let overlay = document.createElement("div");
@@ -75,12 +78,6 @@ img.src = chrome.runtime.getURL("scripts/exiticon.png");
 img.style.width = "40px";
 img.style.height = "40px";
 img.style.float = "right";
-
-// close modal when exiticon is clicked
-img.addEventListener('click', () => {
-    console.log("exiticon clicked");
-    document.body.removeChild(overlay);
-});
 
 // hover effect for exiticon
 img.addEventListener('mouseover', () => {
@@ -295,6 +292,135 @@ checkButton.style.transition = "0.1s";
 checkButton.innerHTML = "Check";
 checkButton.style.float = "right";
 
+
+// create defaut modal 
+let wordBank = document.createElement("div");
+
+wordBank.style.position = "fixed";
+wordBank.style.top = "50%";
+wordBank.style.right = "5%";
+wordBank.style.transform = "translate(20%, 20%)";
+wordBank.style.width = "13%";
+wordBank.style.height = "38%";
+// push modal to right side
+wordBank.style.marginRight = "0.1rem";
+wordBank.style.backgroundColor = "black";
+wordBank.style.borderRadius = "10px";
+wordBank.style.zIndex = "1000";
+wordBank.style.marginLeft = "3rem";
+wordBank.style.backgroundColor = "#fff";
+wordBank.style.border = "2px solid #3c3c3c";
+wordBank.innerHTML = "<h2>Words</h2>";
+wordBank.style.textAlign = "center";
+wordBank.style.paddingTop = "1rem";
+
+let word1 = document.createElement("button");
+word1.className = 'btn';
+word1.id = "button1";
+word1.style.color = "#3c3c3c";
+word1.style.border = "2px solid #7ac70c";
+word1.style.borderBottomWidth = "6px";
+word1.style.borderRadius = "10px";
+word1.style.backgroundColor = "#8ee000";
+word1.style.width = "90%";
+word1.style.marginLeft = "auto";
+word1.style.marginRight = "auto";
+word1.style.marginTop = "0.5rem";
+word1.style.display = "block";
+word1.innerHTML = "test";
+
+let word2 = document.createElement("button");
+word2.className = 'btn';
+word2.id = "button1";
+word2.style.color = "#3c3c3c";
+word2.style.border = "2px solid #7ac70c";
+word2.style.borderBottomWidth = "6px";
+word2.style.borderRadius = "10px";
+word2.style.backgroundColor = "#8ee000";
+word2.style.width = "90%";
+word2.style.marginLeft = "auto";
+word2.style.marginRight = "auto";
+word2.style.display = "block";
+word2.innerHTML = "test";
+
+let word3 = document.createElement("button");
+word3.className = 'btn';
+word3.id = "button1";
+word3.style.color = "#3c3c3c";
+word3.style.border = "2px solid #7ac70c";
+word3.style.borderBottomWidth = "6px";
+word3.style.borderRadius = "10px";
+word3.style.backgroundColor = "#8ee000";
+word3.style.width = "90%";
+word3.style.marginLeft = "auto";
+word3.style.marginRight = "auto";
+word3.style.display = "block";
+word3.innerHTML = "test";
+
+word1.addEventListener('click', () => {
+    word1.style.borderBottomWidth = "2px";
+    word1.style.marginTop = "4px";
+    setTimeout(() => {
+        word1.style.borderBottomWidth = "6px";
+        word1.style.marginTop = "0px";
+    }, 300);
+
+    // add modal
+    overlay.appendChild(modal);
+    modal.appendChild(img);
+    modal.appendChild(element);
+    modal.appendChild(button1);
+    modal.appendChild(button2);
+    modal.appendChild(button3);
+    modal.appendChild(checkButton);
+
+    // Append the overlay to the body
+    document.body.appendChild(overlay);
+
+});
+
+word2.addEventListener('click', () => {
+    word2.style.borderBottomWidth = "2px";
+    word2.style.marginTop = "4px";
+    setTimeout(() => {
+        word2.style.borderBottomWidth = "6px";
+        word2.style.marginTop = "0px";
+    }, 300);
+    
+    // add modal
+    overlay.appendChild(modal);
+    modal.appendChild(img);
+    modal.appendChild(element);
+    modal.appendChild(button1);
+    modal.appendChild(button2);
+    modal.appendChild(button3);
+    modal.appendChild(checkButton);
+
+    // Append the overlay to the body
+    document.body.appendChild(overlay);
+});
+
+word3.addEventListener('click', () => {
+    word3.style.borderBottomWidth = "2px";
+    word3.style.marginTop = "4px";
+    setTimeout(() => {
+        word3.style.borderBottomWidth = "6px";
+        word3.style.marginTop = "0px";
+    }, 300);
+    
+    // add modal
+    overlay.appendChild(modal);
+    modal.appendChild(img);
+    modal.appendChild(element);
+    modal.appendChild(button1);
+    modal.appendChild(button2);
+    modal.appendChild(button3);
+    modal.appendChild(checkButton);
+
+    // Append the overlay to the body
+    document.body.appendChild(overlay);
+});
+
 checkButton.addEventListener('click', () => {
     checkButton.style.borderBottomWidth = "2px";
     checkButton.style.marginTop = "4px";
@@ -305,19 +431,46 @@ checkButton.addEventListener('click', () => {
 
     if (buttonSelected == correctAnswer && buttonSelected == 1) {
         button1Checked = true;
+        word1Completed = true;
         button1.style.backgroundColor = "#d7ffb8";
         button1.style.border = "2px solid #58a700"; 
         button1.style.borderBottom = "6px solid #58a700";
+
+        // change word bank button to grey
+        word1.style.color = "#3c3c3c";
+        word1.style.backgroundColor = "white";
+        word1.style.borderRadius = "16px";
+        word1.style.border = "2px solid #e5e5e5";
+        word1.style.borderBottom = "6px solid #e5e5e5"
+
     } else if (buttonSelected == correctAnswer && buttonSelected == 2) {
         button2Checked = true;
+        word2Completed = true;
         button2.style.backgroundColor = "#d7ffb8";
         button2.style.border = "2px solid #58a700";
         button2.style.borderBottom = "6px solid #58a700";
+
+        // change word bank button to grey
+        word1.style.color = "#3c3c3c";
+        word1.style.backgroundColor = "white";
+        word1.style.borderRadius = "16px";
+        word1.style.border = "2px solid #e5e5e5";
+        word1.style.borderBottom = "6px solid #e5e5e5"
+
     } else if (buttonSelected == correctAnswer && buttonSelected == 3) {
         button3Checked = true;
+        word3Completed = true;
         button3.style.backgroundColor = "#d7ffb8";
         button3.style.border = "2px solid #58a700";
         button3.style.borderBottom = "6px solid #58a700";
+
+        // change word bank button to grey
+        word1.style.color = "#3c3c3c";
+        word1.style.backgroundColor = "white";
+        word1.style.borderRadius = "16px";
+        word1.style.border = "2px solid #e5e5e5";
+        word1.style.borderBottom = "6px solid #e5e5e5"
+
     } else if (buttonSelected != correctAnswer && buttonSelected == 1) {
         button1.style.backgroundColor = "#ffdfdf";
         button1.style.border = "2px solid #ec091a";
@@ -336,14 +489,33 @@ checkButton.addEventListener('click', () => {
     }
 });
 
-// Append the modal to the overlay
-overlay.appendChild(modal);
-modal.appendChild(img);
-modal.appendChild(element);
-modal.appendChild(button1);
-modal.appendChild(button2);
-modal.appendChild(button3);
-modal.appendChild(checkButton);
+// close modal when exiticon is clicked
+img.addEventListener('click', () => {
+    console.log("exiticon clicked");
+    document.body.removeChild(overlay);
+    
+    if (buttonSelected == correctAnswer && buttonSelected == 1) {
+        button1.style.color = "#3c3c3c";
+        word1.style.backgroundColor = "white";
+        button1.style.borderRadius = "16px";
+        button1.style.border = "2px solid #e5e5e5";
+        button1.style.borderBottom = "6px solid #e5e5e5"
+    } else if (buttonSelected == correctAnswer && buttonSelected == 2) {
+        button2.style.color = "#3c3c3c";
+        word2.style.backgroundColor = "white";
+        button2.style.borderRadius = "16px";
+        button2.style.border = "2px solid #e5e5e5";
+        button2.style.borderBottom = "6px solid #e5e5e5"
+    } else if (buttonSelected == correctAnswer && buttonSelected == 3) {
+        button3.style.color = "#3c3c3c";
+        word3.style.backgroundColor = "white";
+        button3.style.borderRadius = "16px";
+        button3.style.border = "2px solid #e5e5e5";
+        button3.style.borderBottom = "6px solid #e5e5e5"
+    }
+});
 
-// Append the overlay to the body
-document.body.appendChild(overlay);
+document.body.appendChild(wordBank);
+wordBank.appendChild(word1);
+wordBank.appendChild(word2);
+wordBank.appendChild(word3);
