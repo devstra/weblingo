@@ -23,7 +23,10 @@ let option1 = "Hello";
 let option2 = "Welcome";
 let option3 = "Goodbye";
 let buttonSelected = 0;
-let correctAnswer = 0;
+let correctAnswer = 1;
+let button1Checked = false;
+let button2Checked = false;
+let button3Checked = false;
 
 // Create an overlay element
 let overlay = document.createElement("div");
@@ -72,6 +75,7 @@ modal.style.zIndex = "10000";
 modal.style.width = "28%";
 modal.style.height = "53%";
 modal.style.fontSize = "100px !important";
+modal.style.borderRadius = "10px";
 
 let translateWord = "Bonjour"
 let element = document.createElement("div");
@@ -192,8 +196,10 @@ button3.addEventListener('click', () => {
 });
 
 button1.onmouseover = function() {
-    button1.style.backgroundColor = "#f8f4f4";
-    img.style.cursor = "pointer";
+    if (button1Checked == false) {
+        button1.style.backgroundColor = "#f8f4f4";
+        img.style.cursor = "pointer";
+    }
 }
 
 button1.onmouseout = function() {
@@ -205,8 +211,10 @@ button1.onmouseout = function() {
 }
 
 button2.onmouseover = function() {
-    button2.style.backgroundColor = "#f8f4f4";
-    img.style.cursor = "pointer";
+    if (button2Checked == false) {
+        button2.style.backgroundColor = "#f8f4f4";
+        img.style.cursor = "pointer";
+    }
 }
 
 button2.onmouseout = function() {
@@ -218,8 +226,10 @@ button2.onmouseout = function() {
 }
 
 button3.onmouseover = function() {
-    button3.style.backgroundColor = "#f8f4f4";
-    img.style.cursor = "pointer";
+    if (button3Checked == false) {
+        button3.style.backgroundColor = "#f8f4f4";
+        img.style.cursor = "pointer";
+    }
 }
 
 button3.onmouseout = function() {
@@ -250,6 +260,35 @@ checkButton.addEventListener('click', () => {
         checkButton.style.borderBottomWidth = "6px";
         checkButton.style.marginTop = "0px";
     }, 300);
+
+    if (buttonSelected == correctAnswer && buttonSelected == 1) {
+        button1Checked = true;
+        button1.style.backgroundColor = "#d7ffb8";
+        button1.style.border = "2px solid #58a700"; 
+        button1.style.borderBottom = "6px solid #58a700";
+    } else if (buttonSelected == correctAnswer && buttonSelected == 2) {
+        button2Checked = true;
+        button2.style.backgroundColor = "#d7ffb8";
+        button2.style.border = "2px solid #58a700";
+        button2.style.borderBottom = "6px solid #58a700";
+    } else if (buttonSelected == correctAnswer && buttonSelected == 3) {
+        button3Checked = true;
+        button3.style.backgroundColor = "#d7ffb8";
+        button3.style.border = "2px solid #58a700";
+        button3.style.borderBottom = "6px solid #58a700";
+    } else if (buttonSelected != correctAnswer && buttonSelected == 1) {
+        button1.style.backgroundColor = "#ffdfdf";
+        button1.style.border = "2px solid #ec091a";
+        button1.style.borderBottom = "6px solid #ec091a";
+    } else if (buttonSelected != correctAnswer && buttonSelected == 2) {
+        button2.style.backgroundColor = "#ffdfdf";
+        button2.style.border = "2px solid #ec091a";
+        button2.style.borderBottom = "6px solid #ec091a"
+    } else if (buttonSelected != correctAnswer && buttonSelected == 3) {
+        button3.style.backgroundColor = "#ffdfdf";
+        button3.style.border = "2px solid #ec091a";
+        button3.style.borderBottom = "6px solid #ec091a"
+    }
 });
 
 // Append the modal to the overlay
