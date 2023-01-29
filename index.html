@@ -1,0 +1,39 @@
+<html lang="en">
+
+<head>
+    <title>Weblingo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+</head>
+<body>
+
+<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js">
+    function translateFunc() {
+        const translate = require('translate-api');
+
+        let transText = 'hello world!';
+        translate.getText(transText,{to: 'zh-CN'}).then(function(text){
+            console.log(text)
+        });
+
+        let transUrl = 'https://nodejs.org/en/';
+            translate.getPage(transUrl).then(function(htmlStr){
+            console.log(htmlStr.length)
+        });
+    }
+</script>
+
+<P>Translate your text</P>
+
+
+<label for="language">Select your language: </label> <input type="text" id="language" name="language">
+<br>
+<label for="input">Input your text: </label> <input type="text" id="input" name="input">
+<button type="submit" onclick='translateFunc();'>Click Here to Translate your text</button>
+
+<!--<h1 data-translate="hello"> Hello! </h1>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+-->
+
+</body>
+</html>
