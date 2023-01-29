@@ -21,4 +21,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     re_path(r'^learn_to_en/$', views.learn_to_en, name='learn_to_en'),
     re_path(r'^en_to_learn/$', views.en_to_learn, name='en_to_learn'),
+    re_path(r'^verify_ans_from_learn/$', views.verify_ans_from_learn, name='verify_ans_from_learn'),
+    re_path(r'^verify_ans_from_en/$', views.verify_ans_from_en, name='verify_ans_from_en'),
 ]
