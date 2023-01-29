@@ -40,9 +40,9 @@ function translateArray(array) {
     }
 }
 
-const article = document.querySelector("article");
+const article = document.querySelector(".c-article-body__content");
 if (article) {
-    let randWordArray = randomWordArray(article.textContent, 3);
+    var randWordArray = randomWordArray(article.textContent, 3);
     console.log(randWordArray);
     // let tArray = translateArray(randWordArray);
     // console.log(tArray);
@@ -50,9 +50,9 @@ if (article) {
     }
 
     // create possible variable options
-let option1 = "Hello";
-let option2 = "Welcome";
-let option3 = "Goodbye";
+let option1 = randWordArray[0];
+let option2 = randWordArray[1];
+let option3 = randWordArray[2];
 let buttonSelected = 0;
 let correctAnswer = 1;
 let button1Checked = false;
@@ -180,6 +180,11 @@ button1.addEventListener('click', () => {
     // set button to blue
     button1.style.backgroundColor = "#ddf4ff";
     button1.style.border = "2px solid #1cb0f6";
+
+    if (button2Checked == true || button3Checked == true) {
+        checkButton.innerHTML = "Check";
+    }
+    button2Checked = true;
 });
 
 button2.addEventListener('click', () => {
@@ -202,6 +207,11 @@ button2.addEventListener('click', () => {
     // set button to blue
     button2.style.backgroundColor = "#ddf4ff";
     button2.style.border = "2px solid #1cb0f6";
+
+    if (button1Checked == true || button3Checked == true) {
+        checkButton.innerHTML = "Check";
+    }
+    button2Checked = true;
 });
 
 button3.addEventListener('click', () => {
@@ -224,6 +234,11 @@ button3.addEventListener('click', () => {
     // set button to blue
     button3.style.backgroundColor = "#ddf4ff";
     button3.style.border = "2px solid #1cb0f6";
+
+    if (button1Checked == true || button2Checked == true) {
+        checkButton.innerHTML = "Check";
+    }
+    button3Checked = true;
 });
 
 button1.onmouseover = function() {
@@ -311,14 +326,17 @@ checkButton.addEventListener('click', () => {
         button1.style.backgroundColor = "#ffdfdf";
         button1.style.border = "2px solid #ec091a";
         button1.style.borderBottom = "6px solid #ec091a";
+        checkButton.innerHTML = "Try Again";
     } else if (buttonSelected != correctAnswer && buttonSelected == 2) {
         button2.style.backgroundColor = "#ffdfdf";
         button2.style.border = "2px solid #ec091a";
         button2.style.borderBottom = "6px solid #ec091a"
+        checkButton.innerHTML = "Try Again";
     } else if (buttonSelected != correctAnswer && buttonSelected == 3) {
         button3.style.backgroundColor = "#ffdfdf";
         button3.style.border = "2px solid #ec091a";
         button3.style.borderBottom = "6px solid #ec091a"
+        checkButton.innerHTML = "Try Again";
     }
 });
 
