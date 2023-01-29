@@ -41,7 +41,7 @@ function translateArray(array) {
 const article = document.querySelector(".c-article-body__content");
 if (article) {
     var instance = new Mark(article);
-    let randWordArray = randomWordArray(article.textContent, 3);
+    var randWordArray = randomWordArray(article.textContent, 3);
     console.log("HERE 123");
     console.log(article.innerHTML);
     for(let i = 0; i < randWordArray.length; i++) {
