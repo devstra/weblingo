@@ -15,6 +15,8 @@ function randomWordArray(text, numWords) {
     return array;
 }
 
+
+
 var serverhost = 'http://127.0.0.1:8000';
 function theObject(request) {
     var url = serverhost + '/weblingo/en_to_learn/?text=' + encodeURIComponent(request.text) + '&lang=' + encodeURIComponent(request.lang);
@@ -24,16 +26,21 @@ function theObject(request) {
     .then(response => console.log(response.translation.toLowerCase()))
     .catch(error => console.log(error))
     return true;
-    }
+}
 
 const article = document.querySelector("article");
 if (article) {
     let randWordArray = randomWordArray(article.textContent, 10);
-    console.log(randWordArray);
+    var instance = new Mark(article);
+
     for(let i = 0; i < randWordArray.length; i++) {
         theObject({text: randWordArray[i], lang: "french"})
     }
-    
+
+    for (let i = 0; i < randWordArray.length; i++) {
+        instance.mark(randWordArray[i]);
+    }
+    console.log(randWordArray);
     }
 
 
