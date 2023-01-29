@@ -48,6 +48,11 @@ img.addEventListener('click', () => {
     document.body.removeChild(overlay);
 });
 
+// hover effect for exiticon
+img.addEventListener('mouseover', () => {
+    img.style.cursor = "pointer";
+});
+
 // Create a modal element
 let modal = document.createElement("div");
 modal.className ='';
