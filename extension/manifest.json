@@ -1,10 +1,27 @@
 {
-    "manifest_version": 3,
-    "name": "Duolingo Extension",
-    "description": "Base Level Extension",
-    "version": "1.0",
-    "action": {
-      "default_popup": "basic.html"
-    },
-    "permissions": ["http://localhost/*"]
+  "manifest_version": 3,
+  "name": "weblingo",
+  "description": "Base Level Extension",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "js": ["scripts/content.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "action": {
+    "default_popup": "basic.html"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+B",
+        "mac": "Command+B"
+      }
+    }
   }
+}
