@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "Duolingo Extension",
+    "description": "Base Level Extension",
+    "version": "1.0",
+    "action": {
+      "default_popup": "basic.html"
+    },
+    "permissions": ["http://localhost/*"]
+  }
