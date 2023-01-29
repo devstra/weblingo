@@ -1,9 +1,3 @@
-chrome.browserAction.onClicked.addListener(function(tab) {
-    chrome.tabs.executeScript(null, { file: "jquery-3.6.3.min.js" }, function() {
-      chrome.tabs.executeScript(null, { file: "popup.js" });
-    });
-  });
-
 function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
 }
@@ -21,8 +15,26 @@ function randomWordArray(text, numWords) {
     return array;
 }
 
+var serverhost = 'http://127.0.0.1:8000';
+function theObject(request) {
+    var url = serverhost + '/weblingo/en_to_learn/?text=' + encodeURIComponent(request.text) + '&lang=' + encodeURIComponent(request.lang);
+    console.log(url);
+    fetch(url)
+    .then(response => response.json())
+    .then(response => console.log(response.translation.toLowerCase()))
+    .catch(error => console.log(error))
+    return true;
+    }
+
 const article = document.querySelector("article");
 if (article) {
     let randWordArray = randomWordArray(article.textContent, 10);
     console.log(randWordArray);
+    for(let i = 0; i < randWordArray.length; i++) {
+        theObject({text: randWordArray[i], lang: "french"})
     }
+    
+    }
+
+
+    
