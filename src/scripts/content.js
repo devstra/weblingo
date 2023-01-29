@@ -18,29 +18,35 @@ function randomWordArray(text, numWords) {
 
 
 var serverhost = 'http://127.0.0.1:8000';
-function theObject(request) {
+function translateApiRequest(request) {
     var url = serverhost + '/weblingo/en_to_learn/?text=' + encodeURIComponent(request.text) + '&lang=' + encodeURIComponent(request.lang);
+    var returnval;
     console.log(url);
     fetch(url)
     .then(response => response.json())
     .then(response => console.log(response.translation.toLowerCase()))
+    .then(function(response) {
+        returnval = response;
+    })
     .catch(error => console.log(error))
-    return true;
+    console.log(returnval);
+    return returnval;
+    }
+
+function translateArray(array) {
+    let newArray = [];
+    for(let i = 0; i < array.length; i++) {
+        newArray.push(translateApiRequest({text: array[i], lang:"french"}))
+    }
 }
 
 const article = document.querySelector("article");
 if (article) {
-    let randWordArray = randomWordArray(article.textContent, 10);
-    var instance = new Mark(article);
-
-    for(let i = 0; i < randWordArray.length; i++) {
-        theObject({text: randWordArray[i], lang: "french"})
-    }
-
-    for (let i = 0; i < randWordArray.length; i++) {
-        instance.mark(randWordArray[i]);
-    }
+    let randWordArray = randomWordArray(article.textContent, 3);
     console.log(randWordArray);
+    // let tArray = translateArray(randWordArray);
+    // console.log(tArray);
+    translateApiRequest({text: randWordArray[0], lang: "latin"});
     }
 
     // create possible variable options
@@ -327,5 +333,6 @@ modal.appendChild(checkButton);
 
 // Append the overlay to the body
 document.body.appendChild(overlay);
+
 
     
