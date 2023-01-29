@@ -1,23 +1,3 @@
-// Modify if article elem present
-/*const article = document.querySelector("article");
-if (nextstate = "ON")
-if (article) {
-    const text = article.textContent;
-    const words = text.matchAll(/[^\s]+/g);
-
-    const wordCount = [...words].length;
-    const readingTime = Math.round(wordCount / 200);
-    const badge = document.createElement("p");
-
-    badge.classList.add("color-secondary-text", "type--caption");
-    badge.textContent = `${readingTime} min read (word count ${wordCount})`;
-
-    const heading = article.querySelector("h1");
-    const date = article.querySelector("time")?.parentNode;
-
-    (date ?? heading).insertAdjacentElement("afterend", badge);
-}*/
-
 // create possible variable options
 let option1 = "Hello";
 let option2 = "Welcome";
@@ -294,7 +274,6 @@ checkButton.addEventListener('click', () => {
 // Append the modal to the overlay
 overlay.appendChild(modal);
 modal.appendChild(img);
-
 modal.appendChild(element);
 modal.appendChild(button1);
 modal.appendChild(button2);
