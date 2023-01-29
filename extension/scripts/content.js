@@ -23,6 +23,7 @@ let option1 = "Hello";
 let option2 = "Welcome";
 let option3 = "Goodbye";
 let buttonSelected = 0;
+let correctAnswer = 0;
 
 // Create an overlay element
 let overlay = document.createElement("div");
@@ -68,8 +69,8 @@ modal.style.transform = "translate(-50%, -50%)";
 modal.style.backgroundColor = "white";
 modal.style.padding = "20px";
 modal.style.zIndex = "10000";
-modal.style.width = "22%";
-modal.style.height = "43%";
+modal.style.width = "28%";
+modal.style.height = "53%";
 modal.style.fontSize = "100px !important";
 
 let translateWord = "Bonjour"
@@ -124,7 +125,18 @@ button3.style.display = "block";
 button3.innerHTML = option3;
 
 button1.addEventListener('click', () => {
+    if (buttonSelected == 2) {
+        button2.style.backgroundColor = "white";
+        button2.style.border = "2px solid #e5e5e5";
+        button2.style.borderBottom = "6px solid #e5e5e5";
+    } else if (buttonSelected == 3) {
+        button3.style.backgroundColor = "white";
+        button3.style.border = "2px solid #e5e5e5";
+        button3.style.borderBottom = "6px solid #e5e5e5";
+    }
+    
     buttonSelected = 1;
+    console.log(buttonSelected);
     button1.style.borderBottom = "2px solid #1cb0f6";
     button1.style.backgroundColor = "";
     setTimeout(() => {
@@ -136,7 +148,18 @@ button1.addEventListener('click', () => {
 });
 
 button2.addEventListener('click', () => {
+    if (buttonSelected == 1) {
+        button1.style.backgroundColor = "white";
+        button1.style.border = "2px solid #e5e5e5";
+        button1.style.borderBottom = "6px solid #e5e5e5";
+    } else if (buttonSelected == 3) {
+        button3.style.backgroundColor = "white";
+        button3.style.border = "2px solid #e5e5e5";
+        button3.style.borderBottom = "6px solid #e5e5e5";
+    }
+
     buttonSelected = 2;
+    console.log(buttonSelected);
     button2.style.borderBottom = "2px solid #1cb0f6";
     setTimeout(() => {
         button2.style.borderBottom = "6px solid #1cb0f6";
@@ -147,7 +170,18 @@ button2.addEventListener('click', () => {
 });
 
 button3.addEventListener('click', () => {
+    if (buttonSelected == 1) {
+        button1.style.backgroundColor = "white";
+        button1.style.border = "2px solid #e5e5e5";
+        button1.style.borderBottom = "6px solid #e5e5e5";
+    } else if (buttonSelected == 2) {
+        button2.style.backgroundColor = "white";
+        button2.style.border = "2px solid #e5e5e5";
+        button2.style.borderBottom = "6px solid #e5e5e5";
+    }
+    
     buttonSelected = 3;
+    console.log(buttonSelected);
     button3.style.borderBottom = "2px solid #1cb0f6";
     setTimeout(() => {
         button3.style.borderBottom = "6px solid #1cb0f6";
@@ -159,27 +193,64 @@ button3.addEventListener('click', () => {
 
 button1.onmouseover = function() {
     button1.style.backgroundColor = "#f8f4f4";
+    img.style.cursor = "pointer";
 }
 
 button1.onmouseout = function() {
-    button1.style.backgroundColor = "white";
+    if (buttonSelected != 1) {
+        button1.style.backgroundColor = "white";
+    } else {
+        button1.style.backgroundColor = "#ddf4ff";
+    }
 }
 
 button2.onmouseover = function() {
     button2.style.backgroundColor = "#f8f4f4";
+    img.style.cursor = "pointer";
 }
 
 button2.onmouseout = function() {
-    button2.style.backgroundColor = "white";
+    if (buttonSelected != 2) {
+        button2.style.backgroundColor = "white";
+    } else {
+        button2.style.backgroundColor = "#ddf4ff";
+    }
 }
 
 button3.onmouseover = function() {
     button3.style.backgroundColor = "#f8f4f4";
+    img.style.cursor = "pointer";
 }
 
 button3.onmouseout = function() {
-    button3.style.backgroundColor = "white";
+    if (buttonSelected != 3) {
+        button3.style.backgroundColor = "white";
+    } else {
+        button3.style.backgroundColor = "#ddf4ff";
+    }
 }
+
+// create check button
+let checkButton = document.createElement("button");
+checkButton.style.width = "40%";
+checkButton.style.border = "2px solid #7ac70c";
+checkButton.style.borderBottomWidth = "6px";
+checkButton.style.borderRadius = "10px";
+checkButton.style.backgroundColor = "#8ee000";
+checkButton.style.color = "#fff";
+checkButton.style.transition = "0.1s";
+checkButton.innerHTML = "Check";
+checkButton.style.float = "right";
+
+
+checkButton.addEventListener('click', () => {
+    checkButton.style.borderBottomWidth = "2px";
+    checkButton.style.marginTop = "4px";
+    setTimeout(() => {
+        checkButton.style.borderBottomWidth = "6px";
+        checkButton.style.marginTop = "0px";
+    }, 300);
+});
 
 // Append the modal to the overlay
 overlay.appendChild(modal);
@@ -189,6 +260,7 @@ modal.appendChild(element);
 modal.appendChild(button1);
 modal.appendChild(button2);
 modal.appendChild(button3);
+modal.appendChild(checkButton);
 
 // Append the overlay to the body
 document.body.appendChild(overlay);
