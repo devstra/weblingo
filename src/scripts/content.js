@@ -304,7 +304,6 @@ button3.onmouseout = function() {
     if (buttonSelected != 3) {
         button3.style.backgroundColor = "white";
     } else if (button3Checked == false) {
-        console.log("yes");
         button3.style.backgroundColor = "#ddf4ff";
     }
 }
@@ -560,7 +559,6 @@ modal.appendChild(checkButton);
 document.body.appendChild(overlay); **/
 // close modal when exiticon is clicked
  img.addEventListener('click', () => {
-    console.log("exiticon clicked");
     document.body.removeChild(overlay);
    
     if (buttonSelected == correctAnswer && buttonSelected == 1) {
