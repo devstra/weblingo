@@ -273,7 +273,7 @@ button1.onmouseover = function() {
 button1.onmouseout = function() {
     if (buttonSelected != 1) {
         button1.style.backgroundColor = "white";
-    } else {
+    } else if (button1Checked == false) {
         button1.style.backgroundColor = "#ddf4ff";
     }
 }
@@ -288,7 +288,7 @@ button2.onmouseover = function() {
 button2.onmouseout = function() {
     if (buttonSelected != 2) {
         button2.style.backgroundColor = "white";
-    } else {
+    } else if (button2Checked == false) {
         button2.style.backgroundColor = "#ddf4ff";
     }
 }
@@ -303,7 +303,8 @@ button3.onmouseover = function() {
 button3.onmouseout = function() {
     if (buttonSelected != 3) {
         button3.style.backgroundColor = "white";
-    } else {
+    } else if (button3Checked == false) {
+        console.log("yes");
         button3.style.backgroundColor = "#ddf4ff";
     }
 }
@@ -359,6 +360,7 @@ checkButton.style.float = "right";
  word1.style.borderBottomWidth = "6px";
  word1.style.borderRadius = "10px";
  word1.style.backgroundColor = "#8ee000";
+ word1.style.height = "22%";
  word1.style.width = "90%";
  word1.style.marginLeft = "auto";
  word1.style.marginRight = "auto";
@@ -375,6 +377,7 @@ checkButton.style.float = "right";
  word2.style.borderBottomWidth = "6px";
  word2.style.borderRadius = "10px";
  word2.style.backgroundColor = "#8ee000";
+ word2.style.height = "22%";
  word2.style.width = "90%";
  word2.style.marginLeft = "auto";
  word2.style.marginRight = "auto";
@@ -390,6 +393,7 @@ checkButton.style.float = "right";
  word3.style.borderBottomWidth = "6px";
  word3.style.borderRadius = "10px";
  word3.style.backgroundColor = "#8ee000";
+ word3.style.height = "22%";
  word3.style.width = "90%";
  word3.style.marginLeft = "auto";
  word3.style.marginRight = "auto";
