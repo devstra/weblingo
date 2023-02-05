@@ -35,19 +35,35 @@ function translateApiRequest(request) {
     return returnval;
     }
 
+function shuffle(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        let rand = Math.floor(Math.random() * (arr.length - i));
+        let temp = arr[arr.length - 1 - i];
+        arr[arr.length - 1 - i] = arr[rand];
+        arr[rand] = temp;
+    }
+};
+
+function refreshButtons() {
+    for (let i = 0; i < buttonArray.length; i++) {
+        buttonArray[i].style.backgroundColor = "white";
+        buttonArray[i].style.border = "2px solid #e5e5e5";
+        buttonArray[i].borderBottom = "6px solid #e5e5e5";
+    }
+}
+
+/** 
 function translateArray(array) {
     let newArray = [];
     for(let i = 0; i < array.length; i++) {
         newArray.push(translateApiRequest({text: array[i], lang:"french"}))
     }
-}
+} **/
 
 const article = document.querySelector(".c-article-body__content");
 if (article) {
     var instance = new Mark(article);
     var randWordArray = randomWordArray(article.textContent, 3);
-    console.log("HERE 123");
-    console.log(article.innerHTML);
     for(let i = 0; i < randWordArray.length; i++) {
         instance.mark(randWordArray[i], {"accuracy": "exactly"});
         //article.innerHTML = article.innerHTML.replace(randWordArray[i], "CHANGING");
@@ -181,6 +197,8 @@ button3.style.marginRight = "auto";
 button3.style.display = "block";
 button3.innerHTML = option3;
 
+
+
 button1.addEventListener('click', () => {
     if (buttonSelected == 2) {
         button2.style.backgroundColor = "white";
@@ -193,7 +211,6 @@ button1.addEventListener('click', () => {
     }
 
     buttonSelected = 1;
-    console.log(buttonSelected);
     button1.style.borderBottom = "2px solid #1cb0f6";
     button1.style.backgroundColor = "";
     setTimeout(() => {
@@ -221,7 +238,6 @@ button2.addEventListener('click', () => {
     }
 
     buttonSelected = 2;
-    console.log(buttonSelected);
     button2.style.borderBottom = "2px solid #1cb0f6";
     setTimeout(() => {
         button2.style.borderBottom = "6px solid #1cb0f6";
@@ -248,7 +264,6 @@ button3.addEventListener('click', () => {
     }
 
     buttonSelected = 3;
-    console.log(buttonSelected);
     button3.style.borderBottom = "2px solid #1cb0f6";
     setTimeout(() => {
         button3.style.borderBottom = "6px solid #1cb0f6";
@@ -308,6 +323,8 @@ button3.onmouseout = function() {
     }
 }
 
+buttonArray = [button1, button2, button3];
+
 // create check button
 let checkButton = document.createElement("button");
 checkButton.style.width = "40%";
@@ -344,14 +361,12 @@ checkButton.style.float = "right";
  wordBank.style.textAlign = "center";
  wordBank.style.paddingTop = "1rem";
 
-/**  for(let i = 0; i < 4; i++) {
-    let newVar = Math.floor((Math.random() * i));
-    let temp = translateArray[i];
-    translateArray[i] = translateArray[newVar];
-    translateArray[newVar] = temp;
-} */
+// Create array to be shuffled when game is opened
+var cloneArray = translateArray.slice(0);
+shuffle(cloneArray);
+console.log(cloneArray);
  
- let word1 = document.createElement("button");
+let word1 = document.createElement("button");
  word1.className = 'btn';
  word1.id = "button1";
  word1.style.color = "#3c3c3c";
@@ -399,7 +414,8 @@ checkButton.style.float = "right";
  word3.style.display = "block";
  word3.innerHTML = translateArray[2].translated;
  
- 
+var currentWord; 
+
  word1.addEventListener('click', () => {
     word1.style.borderBottomWidth = "2px";
     word1.style.marginTop = "4px";
@@ -413,12 +429,19 @@ checkButton.style.float = "right";
     overlay.appendChild(modal);
     modal.appendChild(img);
     modal.appendChild(element);
-    modal.appendChild(button1);
-    modal.appendChild(button2);
-    modal.appendChild(button3);
+
+    shuffle(buttonArray);
+    currentWord = word1.innerHTML;
+
+    refreshButtons();
+
+    modal.appendChild(buttonArray[0]);
+    modal.appendChild(buttonArray[1]);
+    modal.appendChild(buttonArray[2]);
     modal.appendChild(checkButton);
  
- 
+    
+
     // Append the overlay to the body
     document.body.appendChild(overlay);
  
@@ -433,7 +456,11 @@ checkButton.style.float = "right";
         word2.style.borderBottomWidth = "6px";
         word2.style.marginTop = "0px";
     }, 300);
-   
+    
+    shuffle(buttonArray);
+    currentWord = word2.innerHTML;
+    refreshButtons();
+
     // add modal
     overlay.appendChild(modal);
     modal.appendChild(img);
@@ -456,6 +483,10 @@ checkButton.style.float = "right";
         word3.style.borderBottomWidth = "6px";
         word3.style.marginTop = "0px";
     }, 300);
+
+    shuffle(buttonArray);
+    currentWord = word3.innerHTML;
+    refreshButtons();
    
     // add modal
     overlay.appendChild(modal);
@@ -471,7 +502,6 @@ checkButton.style.float = "right";
     document.body.appendChild(overlay);
  });
  
- 
  checkButton.addEventListener('click', () => {
     checkButton.style.borderBottomWidth = "2px";
     checkButton.style.marginTop = "4px";
@@ -480,7 +510,7 @@ checkButton.style.float = "right";
         checkButton.style.marginTop = "0px";
     }, 300);
 
-    if (buttonSelected == correctAnswer && buttonSelected == 1) {
+    if (buttonSelected == 1 && currentWord == getKeyByValue(french, button1.innerHTML)) {
         button1Checked = true;
         word1Completed = true;
         button1.style.backgroundColor = "#d7ffb8";
@@ -496,7 +526,7 @@ checkButton.style.float = "right";
         word1.style.borderBottom = "6px solid #e5e5e5"
  
 
-    } else if (buttonSelected == correctAnswer && buttonSelected == 2) {
+    } else if (currentWord == getKeyByValue(french, button2.innerHTML) && buttonSelected == 2) {
         button2Checked = true;
         word2Completed = true;
         button2.style.backgroundColor = "#d7ffb8";
@@ -512,14 +542,15 @@ checkButton.style.float = "right";
         word1.style.borderBottom = "6px solid #e5e5e5"
  
 
-    } else if (buttonSelected == correctAnswer && buttonSelected == 3) {
+    } else if (currentWord == getKeyByValue(french, button3.innerHTML) && buttonSelected == 3) {
+        console.log(getKeyByValue(french, currentWord));
+        console.log(french.button3);
         button3Checked = true;
         word3Completed = true;
         button3.style.backgroundColor = "#d7ffb8";
         button3.style.border = "2px solid #58a700";
         button3.style.borderBottom = "6px solid #58a700";
 
-        
         // change word bank button to grey
         word1.style.color = "#3c3c3c";
         word1.style.backgroundColor = "white";
@@ -528,23 +559,27 @@ checkButton.style.float = "right";
         word1.style.borderBottom = "6px solid #e5e5e5"
  
 
-    } else if (buttonSelected != correctAnswer && buttonSelected == 1) {
+    } else if (currentWord != getKeyByValue(french, button1.innerHTML) && buttonSelected == 1) {
         button1.style.backgroundColor = "#ffdfdf";
         button1.style.border = "2px solid #ec091a";
         button1.style.borderBottom = "6px solid #ec091a";
         checkButton.innerHTML = "Try Again";
-    } else if (buttonSelected != correctAnswer && buttonSelected == 2) {
+    } else if (currentWord != getKeyByValue(french, button2.innerHTML) && buttonSelected == 2) {
         button2.style.backgroundColor = "#ffdfdf";
         button2.style.border = "2px solid #ec091a";
         button2.style.borderBottom = "6px solid #ec091a"
         checkButton.innerHTML = "Try Again";
-    } else if (buttonSelected != correctAnswer && buttonSelected == 3) {
+    } else if (currentWord != getKeyByValue(french, button3.innerHTML) && buttonSelected == 3) {
         button3.style.backgroundColor = "#ffdfdf";
         button3.style.border = "2px solid #ec091a";
         button3.style.borderBottom = "6px solid #ec091a"
         checkButton.innerHTML = "Try Again";
     }
 });
+
+var testvar = button1.innerHTML;
+console.log(testvar)
+console.log(getKeyByValue(french, testvar));
 
 // Append the modal to the overlay
 /** overlay.appendChild(modal);
