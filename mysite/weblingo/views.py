@@ -22,6 +22,7 @@ def learn_to_en(request):
     t =  translator.translate(text, src=lang, dest="english")
 
     data = {
+        'original': text,
         'translation': t.text,
     }
 
@@ -35,6 +36,7 @@ def en_to_learn(request):
     t =  translator.translate(text, src="english", dest=lang)
 
     data = {
+        'original': text,
         'translation': t.text,
     }
 

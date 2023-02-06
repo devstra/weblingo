@@ -18,22 +18,34 @@ function randomWordArray(text, numWords) {
     }
     return array;
 }
-
+var firstObjArray = [];
 var serverhost = 'http://127.0.0.1:8000';
 function translateApiRequest(request) {
     var url = serverhost + '/weblingo/en_to_learn/?text=' + encodeURIComponent(request.text) + '&lang=' + encodeURIComponent(request.lang);
-    var returnval;
     console.log(url);
+
     fetch(url)
     .then(response => response.json())
-    .then(response => console.log(response.translation.toLowerCase()))
-    .then(function(response) {
-        returnval = response;
-    })
+    .then(response => firstObjArray.push(response))
     .catch(error => console.log(error))
-    console.log(returnval);
-    return returnval;
     }
+
+var translateArray = [];
+
+let translatedArrayComplete = new Promise(function (resolve, reject) {
+    setTimeout(() => firstObjArray.length == 10 ? resolve(true) : reject(null), 2000);
+});
+
+translatedArrayComplete.then(() => {
+    console.log("Yes!");
+    for (let i = 0; i < firstObjArray.length; i++) {
+        if (firstObjArray[i] !== undefined && firstObjArray[i].original.toLowerCase() != firstObjArray[i].translation.toLowerCase()) {
+            translateArray.push(firstObjArray[i]);
+        }
+    }
+    console.log(translateArray);
+    main();
+});
 
 function shuffle(arr) {
     for (let i = 0; i < arr.length; i++) {
@@ -52,47 +64,38 @@ function refreshButtons() {
     }
 }
 
-/** 
-function translateArray(array) {
-    let newArray = [];
-    for(let i = 0; i < array.length; i++) {
-        newArray.push(translateApiRequest({text: array[i], lang:"french"}))
-    }
-} **/
-
 const article = document.querySelector(".c-article-body__content");
 if (article) {
     var instance = new Mark(article);
-    var randWordArray = randomWordArray(article.textContent, 3);
+    var randWordArray = randomWordArray(article.textContent, 10);
     for(let i = 0; i < randWordArray.length; i++) {
         instance.mark(randWordArray[i], {"accuracy": "exactly"});
         //article.innerHTML = article.innerHTML.replace(randWordArray[i], "CHANGING");
     }
-
-
-
-    translateArray = [];
+    let j = 0;
+    for (let i = 0; i < 10; i++) {
+        translateApiRequest({text: randWordArray[i], lang:"french"});
+    }
+    /* translateArray = translateWordArray(randWordArray); */
+    /**
     let j = 0;
     for(let i = 0; i < 30; i++) {
-        let randWordArray = randomWordArray(article.textContent, 30);
-        let found = {translated: getKeyByValue(french, randWordArray[i]), original: randWordArray[i]}
-        if (found.translated !== undefined && !found.translated.includes(' ')) {
+       
+        /** let found = {translated: getKeyByValue(french, randWordArray[i]), original: randWordArray[i]} **/
+        /** if (found.translated !== undefined && !found.translated.includes(' ')) {
             translateArray.push(found);
             j++;
         }
         if (j == 3) {
             break;
         }
-    }
+    } **/
 }
 
-    // create possible variable options
-let arrayNew = [];
-
-
-let option1 = translateArray[0].original;
-let option2 = translateArray[1].original;
-let option3 = translateArray[2].original;
+function main() {
+let option1 = translateArray[0];
+let option2 = translateArray[1];
+let option3 = translateArray[2];
 let buttonSelected = 0;
 let correctAnswer = 1;
 let button1Checked = false;
@@ -145,7 +148,7 @@ modal.style.height = "53%";
 modal.style.fontSize = "100px !important";
 modal.style.borderRadius = "10px";
 
-let translateWord = translateArray[0].translated;
+let translateWord = translateArray[0].translation;
 let element = document.createElement("div");
 element.id = "element";
 element.className = '';
@@ -164,7 +167,8 @@ button1.style.width = "90%";
 button1.style.marginLeft = "auto";
 button1.style.marginRight = "auto";
 button1.style.display = "block";
-button1.innerHTML = option1;
+button1.word = option1;
+button1.innerHTML = button1.word.original;
 
 
 let button2 = document.createElement("button");
@@ -179,7 +183,8 @@ button2.style.width = "90%";
 button2.style.marginLeft = "auto";
 button2.style.marginRight = "auto";
 button2.style.display = "block";
-button2.innerHTML = option2;
+button2.word = option2;
+button2.innerHTML = button2.word.original;
 
 let button3 = document.createElement("button");
 button3.className = 'btn';
@@ -193,7 +198,8 @@ button3.style.width = "90%";
 button3.style.marginLeft = "auto";
 button3.style.marginRight = "auto";
 button3.style.display = "block";
-button3.innerHTML = option3;
+button3.word = option3;
+button3.innerHTML = button3.word.original;
 
 
 
@@ -374,7 +380,8 @@ let word1 = document.createElement("button");
  word1.style.marginRight = "auto";
  word1.style.marginTop = "0.5rem";
  word1.style.display = "block";
- word1.innerHTML = translateArray[0].translated;
+ word1.word = translateArray[0];
+ word1.innerHTML = word1.word.translation;
  
  
  let word2 = document.createElement("button");
@@ -390,7 +397,8 @@ let word1 = document.createElement("button");
  word2.style.marginLeft = "auto";
  word2.style.marginRight = "auto";
  word2.style.display = "block";
- word2.innerHTML = translateArray[1].translated;
+ word2.word = translateArray[1];
+ word2.innerHTML = word2.word.translation;
  
  
  let word3 = document.createElement("button");
@@ -406,7 +414,8 @@ let word1 = document.createElement("button");
  word3.style.marginLeft = "auto";
  word3.style.marginRight = "auto";
  word3.style.display = "block";
- word3.innerHTML = translateArray[2].translated;
+ word3.word = translateArray[2];
+ word3.innerHTML = word3.word.translation;
  
 var currentWord; 
 
@@ -422,6 +431,8 @@ var currentWord;
     // add modal
     overlay.appendChild(modal);
     modal.appendChild(img);
+
+    element.innerHTML = `<h3><br>${word1.innerHTML} means...<h3/>`
     modal.appendChild(element);
 
     shuffle(buttonArray);
@@ -458,6 +469,8 @@ var currentWord;
     // add modal
     overlay.appendChild(modal);
     modal.appendChild(img);
+
+    element.innerHTML = `<h3><br>${word2.innerHTML} means...<h3/>`
     modal.appendChild(element);
     modal.appendChild(buttonArray[0]);
     modal.appendChild(buttonArray[1]);
@@ -485,6 +498,8 @@ var currentWord;
     // add modal
     overlay.appendChild(modal);
     modal.appendChild(img);
+
+    element.innerHTML = `<h3><br>${word3.innerHTML} means...<h3/>`
     modal.appendChild(element);
     modal.appendChild(buttonArray[0]);
     modal.appendChild(buttonArray[1]);
@@ -504,7 +519,7 @@ var currentWord;
         checkButton.style.marginTop = "0px";
     }, 300);
 
-    if (buttonSelected == 1 && currentWord == getKeyByValue(french, button1.innerHTML)) {
+    if (buttonSelected == 1 && currentWord == button1.word.translation) {
         button1Checked = true;
         word1Completed = true;
         button1.style.backgroundColor = "#d7ffb8";
@@ -520,7 +535,7 @@ var currentWord;
         word1.style.borderBottom = "6px solid #e5e5e5"
  
 
-    } else if (currentWord == getKeyByValue(french, button2.innerHTML) && buttonSelected == 2) {
+    } else if (currentWord == button2.word.translation && buttonSelected == 2) {
         button2Checked = true;
         word2Completed = true;
         button2.style.backgroundColor = "#d7ffb8";
@@ -536,7 +551,7 @@ var currentWord;
         word1.style.borderBottom = "6px solid #e5e5e5"
  
 
-    } else if (currentWord == getKeyByValue(french, button3.innerHTML) && buttonSelected == 3) {
+    } else if (currentWord == button3.word.translation && buttonSelected == 3) {
         button3Checked = true;
         word3Completed = true;
         button3.style.backgroundColor = "#d7ffb8";
@@ -551,17 +566,17 @@ var currentWord;
         word1.style.borderBottom = "6px solid #e5e5e5"
  
 
-    } else if (currentWord != getKeyByValue(french, button1.innerHTML) && buttonSelected == 1) {
+    } else if (currentWord != button1.word.translation && buttonSelected == 1) {
         button1.style.backgroundColor = "#ffdfdf";
         button1.style.border = "2px solid #ec091a";
         button1.style.borderBottom = "6px solid #ec091a";
         checkButton.innerHTML = "Try Again";
-    } else if (currentWord != getKeyByValue(french, button2.innerHTML) && buttonSelected == 2) {
+    } else if (currentWord != button2.word.translation && buttonSelected == 2) {
         button2.style.backgroundColor = "#ffdfdf";
         button2.style.border = "2px solid #ec091a";
         button2.style.borderBottom = "6px solid #ec091a"
         checkButton.innerHTML = "Try Again";
-    } else if (currentWord != getKeyByValue(french, button3.innerHTML) && buttonSelected == 3) {
+    } else if (currentWord != button3.word.translation && buttonSelected == 3) {
         button3.style.backgroundColor = "#ffdfdf";
         button3.style.border = "2px solid #ec091a";
         button3.style.borderBottom = "6px solid #ec091a"
@@ -611,3 +626,4 @@ document.body.appendChild(overlay); **/
  wordBank.appendChild(word1);
  wordBank.appendChild(word2);
  wordBank.appendChild(word3);
+};
